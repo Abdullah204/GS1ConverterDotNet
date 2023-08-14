@@ -1,0 +1,12 @@
+/Users/abdullahahmad/gs1-epcis-sdk-NET/gs1sdk/Main/bin/Debug/net6.0/Main.deps.json
+/Users/abdullahahmad/gs1-epcis-sdk-NET/gs1sdk/Main/bin/Debug/net6.0/Main.dll
+/Users/abdullahahmad/gs1-epcis-sdk-NET/gs1sdk/Main/bin/Debug/net6.0/ref/Main.dll
+/Users/abdullahahmad/gs1-epcis-sdk-NET/gs1sdk/Main/bin/Debug/net6.0/Main.pdb
+/Users/abdullahahmad/gs1-epcis-sdk-NET/gs1sdk/Main/obj/Debug/net6.0/Main.csproj.AssemblyReference.cache
+/Users/abdullahahmad/gs1-epcis-sdk-NET/gs1sdk/Main/obj/Debug/net6.0/Main.GeneratedMSBuildEditorConfig.editorconfig
+/Users/abdullahahmad/gs1-epcis-sdk-NET/gs1sdk/Main/obj/Debug/net6.0/Main.AssemblyInfoInputs.cache
+/Users/abdullahahmad/gs1-epcis-sdk-NET/gs1sdk/Main/obj/Debug/net6.0/Main.AssemblyInfo.cs
+/Users/abdullahahmad/gs1-epcis-sdk-NET/gs1sdk/Main/obj/Debug/net6.0/Main.csproj.CoreCompileInputs.cache
+/Users/abdullahahmad/gs1-epcis-sdk-NET/gs1sdk/Main/obj/Debug/net6.0/Main.dll
+/Users/abdullahahmad/gs1-epcis-sdk-NET/gs1sdk/Main/obj/Debug/net6.0/ref/Main.dll
+/Users/abdullahahmad/gs1-epcis-sdk-NET/gs1sdk/Main/obj/Debug/net6.0/Main.pdb
