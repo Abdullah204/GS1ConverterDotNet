@@ -2,7 +2,6 @@ using Xunit;
 using Main.Services;
 using System;
 using System.Collections.Generic;
-
 namespace Main.Tests;
 
 
@@ -18,14 +17,14 @@ public class UnitTest1
     {
         epcConverter = new EPCConverter();
     }
-   
+
 
     [Theory]
     [MemberData(nameof(sgtinGs1ElementToEpcDataProvider))]
     public void testSgtinToEpc(string sgtin, string barcode, string expectedEpcUri)
     {
         string actualEpcUri = this.epcConverter.sgtinToEpc(sgtin);
-        Assert.Equal(expectedEpcUri,actualEpcUri);
+        Assert.Equal(expectedEpcUri, actualEpcUri);
     }
 
     /**
@@ -34,12 +33,13 @@ public class UnitTest1
      * @param string barcode not used in this test
      * @param string expectedEpcUri
      */
+
     [Theory]
     [MemberData(nameof(gtinGs1ElementToEpcDataProvider))]
     public void testGtinToEpc(string gtin, string barcode, string expectedEpcUri)
     {
-       string actualEpcUri = this.epcConverter.gtinToEpc(gtin);
-        Assert.Equal(expectedEpcUri,actualEpcUri);
+        string actualEpcUri = this.epcConverter.gtinToEpc(gtin);
+        Assert.Equal(expectedEpcUri, actualEpcUri);
     }
 
     /**
@@ -49,11 +49,12 @@ public class UnitTest1
      * @param string expectedEpcUri
      */
     [Theory]
+
     [MemberData(nameof(ssccGs1ElementToEpcDataProvider))]
     public void testSsccToEpc(string sscc, string barcode, string expectedEpcUri)
     {
-       string actualEpcUri = this.epcConverter.ssccToEpc(sscc);
-        Assert.Equal(expectedEpcUri,actualEpcUri);
+        string actualEpcUri = this.epcConverter.ssccToEpc(sscc);
+        Assert.Equal(expectedEpcUri, actualEpcUri);
     }
 
     /**
@@ -64,15 +65,17 @@ public class UnitTest1
      * @param string expectedEpcUri
      */
     [Theory]
+
     [MemberData(nameof(glnGs1ElementToEpcDataProvider))]
     public void testGlnToEpc(string gln, string extension, string barcode, string expectedEpcUri)
     {
-       string actualEpcUri = this.epcConverter.glnToEpc(gln);
-        Assert.Equal(expectedEpcUri,actualEpcUri);
+        Console.WriteLine("GLN: " + gln );
+        string actualEpcUri = this.epcConverter.glnToEpc(gln);
+        Assert.Equal(expectedEpcUri, actualEpcUri);
     }
 
 
-    
+
 
     public static IEnumerable<object[]> sgtinGs1ElementToEpcDataProvider =>
         new List<object[]>
