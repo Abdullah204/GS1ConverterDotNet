@@ -1,4 +1,3 @@
-/Users/abdullahahmad/gs1-epcis-sdk-NET/gs1sdk/Main.Tests/bin/Debug/net6.0/CoverletSourceRootsMapping
 /Users/abdullahahmad/gs1-epcis-sdk-NET/gs1sdk/Main.Tests/obj/Debug/net6.0/Main.Tests.csproj.AssemblyReference.cache
 /Users/abdullahahmad/gs1-epcis-sdk-NET/gs1sdk/Main.Tests/obj/Debug/net6.0/Main.Tests.GeneratedMSBuildEditorConfig.editorconfig
 /Users/abdullahahmad/gs1-epcis-sdk-NET/gs1sdk/Main.Tests/obj/Debug/net6.0/Main.Tests.AssemblyInfoInputs.cache
@@ -99,3 +98,4 @@
 /Users/abdullahahmad/gs1-epcis-sdk-NET/gs1sdk/Main.Tests/obj/Debug/net6.0/ref/Main.Tests.dll
 /Users/abdullahahmad/gs1-epcis-sdk-NET/gs1sdk/Main.Tests/obj/Debug/net6.0/Main.Tests.pdb
 /Users/abdullahahmad/gs1-epcis-sdk-NET/gs1sdk/Main.Tests/obj/Debug/net6.0/Main.Tests.genruntimeconfig.cache
+/Users/abdullahahmad/gs1-epcis-sdk-NET/gs1sdk/Main.Tests/bin/Debug/net6.0/CoverletSourceRootsMapping_Main.Tests
