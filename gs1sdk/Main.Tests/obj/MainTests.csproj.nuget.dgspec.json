@@ -1,15 +1,15 @@
 {
   "format": 1,
   "restore": {
-    "/Users/abdullahahmad/gs1-epcis-sdk-NET/gs1sdk/Main.Tests/Main.Tests.csproj": {}
+    "/Users/abdullahahmad/gs1-epcis-sdk-NET/gs1sdk/Main.Tests/MainTests.csproj": {}
   },
   "projects": {
-    "/Users/abdullahahmad/gs1-epcis-sdk-NET/gs1sdk/Main.Tests/Main.Tests.csproj": {
+    "/Users/abdullahahmad/gs1-epcis-sdk-NET/gs1sdk/Main.Tests/MainTests.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/Users/abdullahahmad/gs1-epcis-sdk-NET/gs1sdk/Main.Tests/Main.Tests.csproj",
+        "projectUniqueName": "/Users/abdullahahmad/gs1-epcis-sdk-NET/gs1sdk/Main.Tests/MainTests.csproj",
         "projectName": "GS1.EPCIS.SDK.NET.Test",
-        "projectPath": "/Users/abdullahahmad/gs1-epcis-sdk-NET/gs1sdk/Main.Tests/Main.Tests.csproj",
+        "projectPath": "/Users/abdullahahmad/gs1-epcis-sdk-NET/gs1sdk/Main.Tests/MainTests.csproj",
         "packagesPath": "/Users/abdullahahmad/.nuget/packages/",
         "outputPath": "/Users/abdullahahmad/gs1-epcis-sdk-NET/gs1sdk/Main.Tests/obj/",
         "projectStyle": "PackageReference",

@@ -4,6 +4,12 @@
     <TargetFramework>net6.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
+    <PackageId>GS1.EPCIS.SDK.NET</PackageId>
+    <Version>1.0.0</Version>
+    <Authors>Abdullah_Fouad</Authors>
+    <Company>Origin_Technologies</Company>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+
   </PropertyGroup>
 
 </Project>

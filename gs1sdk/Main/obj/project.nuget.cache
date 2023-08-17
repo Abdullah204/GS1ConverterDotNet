@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "0Ms7SSAoq6Ye/uEaZNn8DBEpycqXqftsivwqEt26iVvliqdj65qIR4Flgc+5Q+HLk3oBWXGW7/D0GnNui109FQ==",
+  "dgSpecHash": "H52S2BlK08M7YHFGKO9Hk9KMFHmTT0oEQE9LJVxyM+buGBeP4vYCnRtYGpJiXdFEIczDVLgbZqrcLvWrMsKD9A==",
   "success": true,
   "projectFilePath": "/Users/abdullahahmad/gs1-epcis-sdk-NET/gs1sdk/Main/Main.csproj",
   "expectedPackageFiles": [],

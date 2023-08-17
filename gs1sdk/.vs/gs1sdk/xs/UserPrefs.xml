@@ -1,32 +1,21 @@
-﻿<Properties StartupConfiguration="{C6490FC6-8825-46F2-B0D5-D8C0A2601D6B}|Default">
+﻿<Properties StartupConfiguration="{0DC38718-A9E3-47EB-9194-F172B3F6CA18}|Default">
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
   <MonoDevelop.Ide.ItemProperties.Main.Tests PreferredExecutionTarget="MonoDevelop.Default" />
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MultiItemStartupConfigurations />
-  <MonoDevelop.Ide.DebuggingService.Breakpoints>
-    <BreakpointStore />
-  </MonoDevelop.Ide.DebuggingService.Breakpoints>
   <MonoDevelop.Ide.Workbench ActiveDocument="Main/EPCConverter.cs">
     <Files>
-      <File FileName="Main/EPCConverter.cs" Line="19" Column="6" />
+      <File FileName="Main/EPCConverter.cs" Line="190" Column="6" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
         <State name="__root__">
           <Node name="gs1sdk" expanded="True">
-            <Node name="Main" expanded="True">
-              <Node name="EPCConverter.cs" selected="True" />
-            </Node>
-            <Node name="Main.Tests" expanded="True">
-              <Node name="Dependencies" expanded="True">
-                <Node name="FrameworkReferences" expanded="True" />
-                <Node name="PackageDependencies" expanded="True" />
-                <Node name="ProjectDependencies" expanded="True" />
-              </Node>
-            </Node>
+            <Node name="Main.Tests" selected="True" />
           </Node>
         </State>
       </Pad>
     </Pads>
   </MonoDevelop.Ide.Workbench>
+  <MultiItemStartupConfigurations />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints />
 </Properties>
