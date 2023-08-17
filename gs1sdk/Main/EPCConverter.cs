@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using System.Text.Json;
 using System.Net.Http.Json;
 using System.Security.Cryptography;
+using System.Text.RegularExpressions;
 
 namespace Main.Services;
 public class EPCConverter
@@ -26,58 +27,124 @@ public class EPCConverter
         }
 
     }
-    //1-
-    public void injectAdditionalGCPLengthMappings(int [] mappings)
+    public void injectAdditionalGCPLengthMappings(Dictionary<string, int> mappings)
     {
+       Dictionary<string, int> injected = new Dictionary<string, int>();
+        foreach (KeyValuePair<string, int> mapping in mappings) {
+            injected[mapping.Key] = mapping.Value;
+        }
+        gcpLengthMapping.Concat(injected);
 
     }
 
-    //2-
-    public void injectTestGCPPrefixMappings(int [] mappings)
+    public void injectTestGCPPrefixMappings(Dictionary<string, int> mappings)
     {
-
+        injectAdditionalGCPLengthMappings(mappings);
     }
-    ////3-
-    //public string version(bool print = true)
-    //{
+    
+    public string version(bool print = true)
+    {
+        string version = "EPCIS SDK v0.0.1";
+        if (print) Console.WriteLine(version);
+        return version;
+    }
+    public string epcToSscc(string epc)
+    {
+        epc = epc.Trim();
+        if ("urn:epc:id:sgtin:" == epc.Substring( 0, 17)) {
+            Dictionary<string, string> sgtin = epcToSgtin(epc);
+            return sgtin["gtin"]+"."+sgtin["serial"];
+        }
+        if ("urn:epc:id:sscc:" != epc.Substring(0, 16))
+            throw new Exception("Invalid SSCC EPC");
+        string[] epcArray = epc.Split(':');
+        string lastElement = epcArray.Last();
+        string gcp = lastElement.Split('.')[0];
+        string container = lastElement.Split('.')[1];
+        string extensionDigit = container.Substring(0, 1);
+        container = container.Substring(1);
+        int checkDigit = calculateCheckDigit(extensionDigit + gcp + container);
 
-    //}
-    ////4-
-    //public string epcToSscc(string epc)
-    //{
+        return extensionDigit +gcp+container +checkDigit;
+    }
+    public Dictionary<string, string> epcToGln(string epc)
+    {
+        string ext,gln;
+        epc = epc.Trim();
+        Match match = Regex.Match(epc, @"^(?<gln>\d{13})\.(?<ext>\w*)$");
+        
+        if (Regex.IsMatch(epc, @"^\d{13}$")) {
+            gln = epc;
+            ext = "0";
+        }
+        else if (match.Success) {
+            gln = match.Groups["gln"].Value;
+            ext = match.Groups["ext"].Value;
+        }
+        else if ("urn:epc:id:sgln:" == epc.Substring( 0, 16)) {
+            string[] epcArray = epc.Split(':');
+            string lastElement = epcArray.Last();
+            string gcp = lastElement.Split('.')[0];
+            string location = lastElement.Split('.')[1];
+            ext = lastElement.Split('.')[2];
+            gln = gcp +location + calculateCheckDigit(gcp + location);
+        }else {
+            throw new Exception("Invalid SGLN EPC");
+        }
+        return new Dictionary<string, string>
+        {
+            { "414", gln },
+            { "254", ext },
+            { "gln", gln },
+            { "ext", ext }
+        };
+        
+    }
+    public Dictionary<string, string> epcToSgtin(string epc)
+    {
+        epc = epc.Trim();
+        if ("urn:epc:id:sgtin:" != epc.Substring(0, 17))
+            throw new Exception("Invalid SGTIN EPC");
 
-    //}
-    ////5-
-    //public string[] epcToGln(string epc)
-    //{
+        string[] epcArray = epc.Split(':');
+        string lastElement = epcArray.Last();
+        string gcp = lastElement.Split('.')[0];
+        string gtin = lastElement.Split('.')[1];
+        string serial = lastElement.Split('.')[2];
+        
+        string extensionDigit = gtin.Substring(0, 1);
+        gtin = gtin.Substring(1);
+        gtin = extensionDigit+gcp+gtin+calculateCheckDigit(extensionDigit +gcp +gtin);
 
-    //}
-    ////6-
-    //public string[] epcToSgtin(string epc)
-    //{
+        
+        return new Dictionary<string, string>
+        {
+            {"01" , gtin},
+            {"21" , serial},
+            {"gtin" , gtin},
+            {"serial" , serial}
+        };
+    }
+    
+    public Dictionary<string, string>  sgtinArrayToEpc(string gtin, string[] serials, int? gcpLength = null)
+    {
+        string[] fragments = extractGTINFragments(gtin, gcpLength);
 
-    //}
-    ////7-
-    //public string sgtinToEpc(string sgtin, int gcpLength = null)
-    //{
-
-    //}
-    ////8-
-    //public string[] sgtinArrayToEpc(string gtin, string[] serials, int gcpLength = null)
-    //{
-
-    //}
-    ////9-
-    //public string sgtinBarcodeToEpc(string sgtinBarcode, int gcpLength = null)
-    //{
-
-    //}
-    ////10-
-    //public string gtinToEpc(string gtin, int gcpLength = null)
-    //{
-
-    //}
-    ////11-
+        Dictionary<string, string> sgtins = new Dictionary<string, string>();
+        String value = "urn:epc:id:sgtin:" + fragments[1] +"."+fragments[0]+fragments[2]+".";
+        foreach (string serial in serials)
+        {
+            sgtins.Add(serial, value + serial);
+        }
+        
+        return sgtins;
+    }
+    public string sgtinBarcodeToEpc(string sgtinBarcode, int? gcpLength = null)
+    {
+        string sgtin = Regex.Replace(sgtinBarcode,@"^(?<gtin>\d{14})\.?21(\w*)$",@"\$1\$2");
+        return sgtinToEpc(sgtin, gcpLength);
+    }
+    
     public string ssccToEpc(string sscc, int? gcpLength = null)
     {
         if(gcpLength == null)
@@ -94,12 +161,15 @@ public class EPCConverter
 
         return "urn:epc:id:sscc:"+gcp+"." + extensionDigit + containerRef;
     }
-    ////12-
-    //public string ssccBarcodeToEpc(string ssccBarcode, int gcpLength = null)
-    //{
+    public string ssccBarcodeToEpc(string ssccBarcode, int? gcpLength = null)
+    {
+        if (ssccBarcode.Substring(0, 2) == '00'){
+            string sscc = substr(ssccBarcode, 2);
+            return ssccToEpc(sscc, gcpLength);
+        }
 
-    //}
-    ////13-
+        reportGenericError("ERROR : the SSCC barcode ({$ssccBarcode}) is not valid !");
+    }
     public string glnToEpc(string gln, int? gcpLength = null)
     {
         
@@ -117,12 +187,10 @@ public class EPCConverter
 
         return "urn:epc:id:sgln:"+ gcp + "."+locationRef+".0";
     }
-    ////14-
-    //public string glnAndDocNumToBizTrx(string gln, string documentNumber)
-    //{
-
-    //}
-    //15-
+    public string glnAndDocNumToBizTrx(string gln, string documentNumber)
+    {
+        return "urn:epcglobal:cbv:bt:"+gln+":"+documentNumber;
+    }
     public int getGcpLength(string gs1Element)
     {
         for (int i = 3; i < 12; i++)
@@ -133,7 +201,6 @@ public class EPCConverter
         }
         return 0;
     }
-    //16-
     private string[] extractGTINFragments(string sgtin, int? gcpLength = null)
     {
         
@@ -152,18 +219,15 @@ public class EPCConverter
         string[] result = new string[] { extensionDigit, gcp,itemRef , serial };
         return result;
     }
-    //17-
     private void reportGcpLengthError(string gs1Element, string elementType)
     {
         throw new Exception("ERROR: can’t find GCP length for" +elementType+" " + gs1Element);
 
     }
-    //18-
     private void reportGenericError(string errorDescription)
     {
         throw new Exception(errorDescription);
     }
-    //19-
     public bool hasValidCheckDigit(string gln)
     {
         int actualDigit = gln[gln.Length - 1] - '0';
@@ -174,7 +238,6 @@ public class EPCConverter
 
 
    
-    //20-
     public string sgtinToEpc(string sgtin , int? gcpLength = null)
     {
         string[] fragments = extractGTINFragments(sgtin, gcpLength);
@@ -184,11 +247,8 @@ public class EPCConverter
         return "urn:epc:id:sgtin:" + fragments[1] +"."+ fragments[0] + fragments[2] +"."+fragments[3];
 
     }
-    //21-
-    
-        //22-
-    
-        //23-
+    /
+        
     public string gtinToEpc(string sgtin, int? gcpLength = null)
     {
         string[] fragments = extractGTINFragments(sgtin,gcpLength);

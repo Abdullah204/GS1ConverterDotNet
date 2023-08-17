@@ -8,14 +8,21 @@
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
   <MonoDevelop.Ide.Workbench ActiveDocument="Main/EPCConverter.cs">
     <Files>
-      <File FileName="Main/EPCConverter.cs" Line="9" Column="25" />
+      <File FileName="Main/EPCConverter.cs" Line="19" Column="6" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
         <State name="__root__">
           <Node name="gs1sdk" expanded="True">
-            <Node name="Main">
+            <Node name="Main" expanded="True">
               <Node name="EPCConverter.cs" selected="True" />
+            </Node>
+            <Node name="Main.Tests" expanded="True">
+              <Node name="Dependencies" expanded="True">
+                <Node name="FrameworkReferences" expanded="True" />
+                <Node name="PackageDependencies" expanded="True" />
+                <Node name="ProjectDependencies" expanded="True" />
+              </Node>
             </Node>
           </Node>
         </State>
