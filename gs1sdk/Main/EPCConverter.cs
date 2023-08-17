@@ -163,12 +163,13 @@ public class EPCConverter
     }
     public string ssccBarcodeToEpc(string ssccBarcode, int? gcpLength = null)
     {
-        if (ssccBarcode.Substring(0, 2) == '00'){
-            string sscc = substr(ssccBarcode, 2);
+        if (ssccBarcode.Substring(0, 2) == "00"){
+            string sscc = ssccBarcode.Substring(2);
             return ssccToEpc(sscc, gcpLength);
         }
 
         reportGenericError("ERROR : the SSCC barcode ({$ssccBarcode}) is not valid !");
+        return "";
     }
     public string glnToEpc(string gln, int? gcpLength = null)
     {
@@ -247,7 +248,7 @@ public class EPCConverter
         return "urn:epc:id:sgtin:" + fragments[1] +"."+ fragments[0] + fragments[2] +"."+fragments[3];
 
     }
-    /
+    
         
     public string gtinToEpc(string sgtin, int? gcpLength = null)
     {
@@ -259,7 +260,6 @@ public class EPCConverter
 
     public static int calculateCheckDigit(string gs1Key)
     {
-        string z = "a";
         
         if (gs1Key.Length == 12)
             gs1Key = "0$gs1Key";
